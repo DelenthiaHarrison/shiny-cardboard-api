@@ -1,0 +1,28 @@
+{
+  "name": "shiny-cardboard-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DelenthiaHarrison/shiny-cardboard-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/DelenthiaHarrison/shiny-cardboard-api/issues"
+  },
+  "homepage": "https://github.com/DelenthiaHarrison/shiny-cardboard-api#readme",
+  "dependencies": {
+    "@prisma/client": "^6.5.0",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "prisma": "^6.5.0"
+  }
+}
