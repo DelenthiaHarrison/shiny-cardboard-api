@@ -1,15 +1,41 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider = "prisma-client-js"
 }
-
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model Set {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  series      String
+  totalCards  Int
+  releaseDate DateTime
+  createdAt   DateTime @default(now())
+  cards       Card[]
+}
+
+model Card {
+  id          Int      @id @default(autoincrement())
+  name        String
+  cardNumber  String
+  rarity      String
+  type        String
+  artist      String
+  imageUrl    String?
+  setId       Int
+  set         Set      @relation(fields: [setId], references: [id])
+  createdAt   DateTime @default(now())
+  collections Collection[]
+}
+
+model Collection {
+  id        Int      @id @default(autoincrement())
+  userId    String
+  cardId    Int
+  card      Card     @relation(fields: [cardId], references: [id])
+  quantity  Int      @default(1)
+  condition String
+  createdAt DateTime @default(now())
 }
