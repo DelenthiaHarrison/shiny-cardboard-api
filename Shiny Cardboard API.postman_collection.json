@@ -1,0 +1,244 @@
+{
+  "info": {
+    "_postman_id": "bbe361e1-8d54-4bfa-bb33-03df69990ae0",
+    "name": "Shiny Cardboard API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "52405459",
+    "_collection_link": "https://go.postman.co/collection/52405459-bbe361e1-8d54-4bfa-bb33-03df69990ae0?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Get all sets",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/sets",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "sets"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get set by ID",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/sets/8",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "sets",
+            "8"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Set",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"Temporal Forces\",\r\n  \"series\": \"Scarlet Violet\",\r\n  \"totalCards\": 162,\r\n  \"releaseDate\": \"2024-03-22\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/sets",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "sets"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get all cards",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/cards",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "cards"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get all collections",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/collections",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "collections"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Missing Cards",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/collections/sets/1/missing?userId=user1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "collections",
+            "sets",
+            "1",
+            "missing"
+          ],
+          "query": [
+            {
+              "key": "userId",
+              "value": "user1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Card",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"Eevee\",\r\n  \"cardNumber\": \"133/198\",\r\n  \"rarity\": \"Common\",\r\n  \"type\": \"Colorless\",\r\n  \"artist\": \"Atsuko Nishida\",\r\n  \"setId\": 8\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/cards",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "cards"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get card by ID",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/cards/10",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "cards",
+            "10"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create collection",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"userId\": \"user1\",\r\n  \"cardId\": 10,\r\n  \"quantity\": 1,\r\n  \"condition\": \"NM\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/collections",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "collections"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

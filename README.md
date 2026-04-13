@@ -24,3 +24,13 @@ A REST API for tracking and managing Trading Card Game (TCG) collections. Built 
 ```
 
 3. Create a `.env` file in the root directory and add your database connection string:
+
+## Postman Documentation
+
+A Postman collection with example requests and responses for all endpoints is included in this repository as `postman_collection.json`.
+
+To use it:
+1. Open Postman
+2. Click **Import**
+3. Select the `postman_collection.json` file
+4. All endpoints will be ready to test with example data
