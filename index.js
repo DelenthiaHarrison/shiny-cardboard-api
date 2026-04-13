@@ -3,6 +3,9 @@ const app = express();
 
 app.use(express.json());
 
+const logger = require('./middleware/logger');
+app.use(logger);
+
 const setsRouter = require('./routes/sets');
 const cardsRouter = require('./routes/cards');
 const collectionsRouter = require('./routes/collections');
@@ -14,6 +17,9 @@ app.use('/collections', collectionsRouter);
 app.get('/', (req, res) => {
   res.json({ message: 'Shiny Cardboard API is running!' });
 });
+
+const errorHandler = require('./middleware/errorHandler');
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
