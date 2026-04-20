@@ -1,0 +1,53 @@
+const fs = require('fs');
+const path = require('path');
+
+const content = [
+  "const express = require('express');",
+  "const router = express.Router();",
+  "const { PrismaClient } = require('@prisma/client');",
+  "const prisma = new PrismaClient();",
+  "const { authenticate, authorizeAdmin } = require('../middleware/authenticate');",
+  "",
+  "router.get('/', async (req, res) => {",
+  "  try {",
+  "    const cards = await prisma.card.findMany({ include: { set: true } });",
+  "    res.status(200).json(cards);",
+  "  } catch (error) { res.status(500).json({ error: 'Failed to retrieve cards' }); }",
+  "});",
+  "",
+  "router.get('/:id', async (req, res) => {",
+  "  try {",
+  "    const card = await prisma.card.findUnique({ where: { id: parseInt(req.params.id) }, include: { set: true } });",
+  "    if (!card) return res.status(404).json({ error: 'Card not found' });",
+  "    res.status(200).json(card);",
+  "  } catch (error) { res.status(500).json({ error: 'Failed to retrieve card' }); }",
+  "});",
+  "",
+  "router.post('/', authenticate, authorizeAdmin, async (req, res) => {",
+  "  try {",
+  "    const { name, cardNumber, rarity, type, artist, imageUrl, setId } = req.body;",
+  "    const card = await prisma.card.create({ data: { name, cardNumber, rarity, type, artist, imageUrl, setId: parseInt(setId) } });",
+  "    res.status(201).json(card);",
+  "  } catch (error) { res.status(500).json({ error: 'Failed to create card' }); }",
+  "});",
+  "",
+  "router.put('/:id', authenticate, authorizeAdmin, async (req, res) => {",
+  "  try {",
+  "    const { name, cardNumber, rarity, type, artist, imageUrl, setId } = req.body;",
+  "    const card = await prisma.card.update({ where: { id: parseInt(req.params.id) }, data: { name, cardNumber, rarity, type, artist, imageUrl, setId: parseInt(setId) } });",
+  "    res.status(200).json(card);",
+  "  } catch (error) { res.status(500).json({ error: 'Failed to update card' }); }",
+  "});",
+  "",
+  "router.delete('/:id', authenticate, authorizeAdmin, async (req, res) => {",
+  "  try {",
+  "    await prisma.card.delete({ where: { id: parseInt(req.params.id) } });",
+  "    res.status(200).json({ message: 'Card deleted successfully' });",
+  "  } catch (error) { res.status(500).json({ error: 'Failed to delete card' }); }",
+  "});",
+  "",
+  "module.exports = router;"
+].join('\n');
+
+fs.writeFileSync(path.join(__dirname, '../routes/cards.js'), content);
+console.log('cards.js written successfully!');

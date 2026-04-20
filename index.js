@@ -9,7 +9,8 @@ app.use(logger);
 const setsRouter = require('./routes/sets');
 const cardsRouter = require('./routes/cards');
 const collectionsRouter = require('./routes/collections');
-
+const authRouter = require('./routes/auth');
+app.use('/auth', authRouter);
 app.use('/sets', setsRouter);
 app.use('/cards', cardsRouter);
 app.use('/collections', collectionsRouter);

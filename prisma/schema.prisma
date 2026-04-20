@@ -1,14 +1,31 @@
 generator client {
   provider = "prisma-client-js"
 }
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id          Int          @id @default(autoincrement())
+  username    String       @unique
+  email       String       @unique
+  password    String
+  role        Role         @default(user)
+  createdAt   DateTime     @default(now())
+  collections Collection[]
+}
+
+enum Role {
+  user
+  admin
+}
+
 model Set {
   id          Int      @id @default(autoincrement())
   name        String   @unique
+  setCode     String   @unique
   series      String
   totalCards  Int
   releaseDate DateTime
@@ -17,7 +34,7 @@ model Set {
 }
 
 model Card {
-  id          Int      @id @default(autoincrement())
+  id          Int              @id @default(autoincrement())
   name        String
   cardNumber  String
   rarity      String
@@ -25,17 +42,35 @@ model Card {
   artist      String
   imageUrl    String?
   setId       Int
-  set         Set      @relation(fields: [setId], references: [id])
-  createdAt   DateTime @default(now())
-  collections Collection[]
+  set         Set              @relation(fields: [setId], references: [id])
+  createdAt   DateTime         @default(now())
+  collections CollectionCard[]
 }
 
 model Collection {
-  id        Int      @id @default(autoincrement())
-  userId    String
-  cardId    Int
-  card      Card     @relation(fields: [cardId], references: [id])
-  quantity  Int      @default(1)
-  condition String
-  createdAt DateTime @default(now())
+  id        Int              @id @default(autoincrement())
+  userId    Int
+  user      User             @relation(fields: [userId], references: [id])
+  name      String
+  createdAt DateTime         @default(now())
+  cards     CollectionCard[]
+}
+
+model CollectionCard {
+  id           Int        @id @default(autoincrement())
+  collectionId Int
+  collection   Collection @relation(fields: [collectionId], references: [id])
+  cardId       Int
+  card         Card       @relation(fields: [cardId], references: [id])
+  quantity     Int        @default(1)
+  condition    Condition
+  createdAt    DateTime   @default(now())
+}
+
+enum Condition {
+  Mint
+  NearMint
+  LightlyPlayed
+  ModeratelyPlayed
+  HeavilyPlayed
 }
