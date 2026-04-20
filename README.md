@@ -83,3 +83,18 @@ npm test
 - Card variants
 - Collection analytics
 - Premium user tier
+
+
+## Deployment
+
+Live API: https://shiny-cardboard-api.onrender.com
+
+## Postman Documentation
+
+A Postman collection is included in this repository as Shiny Cardboard API.postman_collection.json
+
+To use it:
+1. Open Postman
+2. Click Import
+3. Select the file
+4. All endpoints ready to test
