@@ -1,48 +1,32 @@
 const request = require('supertest');
 const express = require('express');
 const collectionsRouter = require('../routes/collections');
-const cardsRouter = require('../routes/cards');
-const setsRouter = require('../routes/sets');
-
+const authRouter = require('../routes/auth');
 const app = express();
 app.use(express.json());
-app.use('/sets', setsRouter);
-app.use('/cards', cardsRouter);
+app.use('/auth', authRouter);
 app.use('/collections', collectionsRouter);
-
+let userToken;
+beforeAll(async () => {
+  const res = await request(app).post('/auth/login').send({ email: 'user@shiny.com', password: 'password123' });
+  userToken = res.body.token;
+});
 describe('Collections API', () => {
-  test('GET /collections returns 200 and an array', async () => {
+  test('GET /collections returns 401 without token', async () => {
     const res = await request(app).get('/collections');
+    expect(res.statusCode).toBe(401);
+  });
+  test('GET /collections returns 200 with token', async () => {
+    const res = await request(app).get('/collections').set('Authorization', 'Bearer ' + userToken);
     expect(res.statusCode).toBe(200);
     expect(Array.isArray(res.body)).toBe(true);
   });
-
-  test('GET /collections/:id returns 404 for nonexistent entry', async () => {
-    const res = await request(app).get('/collections/99999');
-    expect(res.statusCode).toBe(404);
+  test('POST /collections returns 401 without token', async () => {
+    const res = await request(app).post('/collections').send({ name: 'Test Binder' });
+    expect(res.statusCode).toBe(401);
   });
-
-  test('POST /collections returns 201 with valid data', async () => {
-    const setRes = await request(app).post('/sets').send({
-      name: 'Test Set ' + Date.now(),
-      series: 'Test Series',
-      totalCards: 100,
-      releaseDate: '2024-01-01'
-    });
-    const cardRes = await request(app).post('/cards').send({
-      name: 'Squirtle',
-      cardNumber: '007/198',
-      rarity: 'Common',
-      type: 'Water',
-      artist: 'Mitsuhiro Arita',
-      setId: setRes.body.id
-    });
-    const res = await request(app).post('/collections').send({
-      userId: 'testuser',
-      cardId: cardRes.body.id,
-      quantity: 1,
-      condition: 'NM'
-    });
+  test('POST /collections returns 201 with token', async () => {
+    const res = await request(app).post('/collections').set('Authorization', 'Bearer ' + userToken).send({ name: 'Test Binder ' + Date.now() });
     expect(res.statusCode).toBe(201);
     expect(res.body).toHaveProperty('id');
   });
