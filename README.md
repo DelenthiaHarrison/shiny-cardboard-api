@@ -70,6 +70,13 @@ GET /collections/sets/:setId/missing - Get uncollected cards (auth required)
 - Collection - name, userId
 - CollectionCard - collectionId, cardId, quantity, condition
 
+Relationships
+
+- User has many Collections
+- Collection has many CollectionCards (junction table)
+- Card has many CollectionCards
+- Set has many Cards
+
 ## Running Tests
 
 npm test
