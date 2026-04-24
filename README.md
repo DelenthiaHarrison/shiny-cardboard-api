@@ -87,7 +87,7 @@ npm test
 
 - Trade offer system
 - Price history tracking
-- Card variants
+- Clearly delineated Card variants
 - Collection analytics
 - Premium user tier
 
