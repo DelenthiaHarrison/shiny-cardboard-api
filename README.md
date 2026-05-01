@@ -102,6 +102,6 @@ To use it:
 1. Open Postman
 2. Click Import
 3. Select the file
-4. All endpoints ready to test
+4. All endpoints are ready to test
 
-https://delenthiah-5294775.postman.co/workspace/CMSC-103~0ae92016-e7de-4392-847d-fc6480408c3a/collection/52405459-bbe361e1-8d54-4bfa-bb33-03df69990ae0?action=share&creator=52405459
+Postman Link: https://delenthiah-5294775.postman.co/workspace/CMSC-103~0ae92016-e7de-4392-847d-fc6480408c3a/collection/52405459-bbe361e1-8d54-4bfa-bb33-03df69990ae0?action=share&creator=52405459
