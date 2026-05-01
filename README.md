@@ -2,8 +2,6 @@
 
 A REST API for tracking and managing Trading Card Game (TCG) collections.
 
-**Live API:** https://shiny-cardboard-api.onrender.com
-
 ## Technologies Used
 
 - Node.js
@@ -105,3 +103,5 @@ To use it:
 2. Click Import
 3. Select the file
 4. All endpoints ready to test
+
+https://delenthiah-5294775.postman.co/workspace/CMSC-103~0ae92016-e7de-4392-847d-fc6480408c3a/collection/52405459-bbe361e1-8d54-4bfa-bb33-03df69990ae0?action=share&creator=52405459
